@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "sora";
+    src: url('../../public/assets/fonts/Sora-Medium.ttf');
+}
+
+.useSora{
+    font-family: "sora";
+}
+
+@font-face {
+    font-family: "londrina";
+    src: url('../../public/assets/fonts/LondrinaSolid-Light.ttf');
+}
+
+.useLondrina{
+    font-family: "londrina";
+}
+
+@font-face {
+    font-family: "lobster";
+    src: url('../../public/assets/fonts/LobsterTwo-Regular.ttf');
+}
+
+.useLobster{
+    font-family: "lobster";
+}
+
+@font-face {
+    font-family: "circular";
+    src: url('../../public/assets/fonts/circular.ttf');
+}
+
+.useCircular{
+    font-family: "circular";
+}

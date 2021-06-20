@@ -1,0 +1,101 @@
+[{
+    "id": 1,
+    "nameCA": "Paper i Cartró",
+    "nameES": "Papel y Cartón",
+    "nameEN": "Paper and Cardboard",
+    "color": "blue",
+    "defCA": "En aquest contenidor s'han de dipositar els envasos de cartó (caixes, safates, etc.), Així com els diaris, revistes, papers d'embolicar, propaganda, etc. És aconsellable plegar les caixes de manera que ocupin el mínim espai dins del contenidor. No podrem dipositar mai restes de poda, briks, tovallons bruts, paper d’alumini, etc.",
+    "defES": "En este contenedor se tienen que depositar los envases de cartón (cajas, bandejas, etc.), Así como los diarios, revistas, papeles de envolver, propaganda, etc. Es aconsejable plegar las cajas de forma que ocupen el mínimo espacio dentro del contenedor. No podremos depositar nunca restos de poda, briks, servilletas sucias, papel de aluminio, etc.",
+    "defEN": "Cardboard packaging (boxes, trays, etc.), as well as newspapers, magazines, wrapping paper, advertising, etc., should be deposited in this container. It is advisable to fold the boxes so that they take up the minimum amount of space inside the container. We can never deposit pruning waste, briks, dirty napkins, aluminium foil, etc."
+  },
+  {
+    "id": 2,
+    "nameCA": "Envàs de Vidre",
+    "nameES": "Envase de Vidrio",
+    "nameEN": "Glass bottles and Jars",
+    "color": "green",
+    "defCA": "En aquest contenidor es diposita vidre com ampolles de vidre, pots de colònia i cosmètica, i pots de conserves. No s'hi poden llençar xapes ni tapes de metall, tampoc bombetes, resta de vaixelles i vidres trencats.",
+    "defES": "En este contenedor se deposita vidrio como botellas de vidrio, puedes de colonia y cosmética, y puedes de conservas. No se pueden tirar chapas ni tapas de metal, tampoco bombillas, resto de vajillas y vidrios rotos.",
+    "defEN": "This container holds glass such as glass bottles, cologne and cosmetic bottles, and canned food bottles. You cannot throw metal plates or lids, light bulbs, broken crockery and broken glass."
+  },
+  {
+    "id": 3,
+    "nameCA": "Envàs Lleguer",
+    "nameES": "Envase Ligero",
+    "nameEN": "Light Packaging",
+    "color": "yellow",
+    "defCA": "En aquest contenidor s'han de dipositar tot tipus d'envasos lleugers com els envasos de plàstics (ampolles, terrines, bosses, safates, etc.), llaunes (begudes, conserves, etc.), briks, paper d'alumini. No podrem dipositar mai CD, roba, joguines, bolquers, envasos de vidre, etc.",
+    "defES": "En este contenedor se tienen que depositar todo tipo de envases ligeros como los envases de plásticos (botellas, tarrinas, bolsas, bandejas, etc.), latas (bebidas, conservas, etc.), briks, papel de aluminio. No podremos depositar nunca CD, ropa, juguetes, pañales, envases de vidrio, etc.",
+    "defEN": "All types of light packaging such as plastic containers (bottles, tubs, bags, trays, etc.), cans (drinks, preserves, etc.), briks, aluminium foil, etc. must be deposited in this container. CDs, clothes, toys, nappies, nappies, glass containers, etc. should never be disposed of."
+  },
+  {
+    "id": 4,
+    "nameCA": "Fracció Resta",
+    "nameES": "Fracción Resto",
+    "nameEN": "Other Waste",
+    "color": "gray",
+    "defCA": "Al contenidor gris, resta, hem de dipositar tots aquells residus que no siguin envasos o que no tinguin un sistema específic de recollida.",
+    "defES": "Al contenedor gris, resto, tenemos que depositar todos aquellos residuos que no sean envases o que no tengan un sistema específico de recogida.",
+    "defEN": "All waste that is not packaging or that does not have a specific collection system should be deposited in the grey container, the rest."
+  },
+  {
+    "id": 5,
+    "nameCA": "Fracció Orgànica",
+    "nameES": "Fracción Orgánica",
+    "nameEN": "Organic Waste",
+    "color": "brown",
+    "defCA": "En aquest contenidor es diposita restes de menjar, restes vegetals, taps de suro, el marro del cafè, paper de cuina... No podrem dipositar mai llaunes de conserva, bolquers, burilles i cendra de tabac, benes, tiretes, etc.",
+    "defES": "En este contenedor se deposita restos de comida, restos vegetales, tapones de corcho, lo marro del café, papel de cocina... No podremos depositar nunca latas de conserva, pañales, colillas y ceniza de tabaco, vendas, tiritas, etc.",
+    "defEN": "Food waste, vegetable waste, cork stoppers, coffee grounds, kitchen paper, etc. can be disposed of in this container. Canned food cans, nappies, cigarette butts and tobacco ash, bandages, plasters, etc. can never be deposited in this container."
+  },
+  {
+    "id": 6,
+    "nameCA": "Piles i Acumuladors",
+    "nameES": "Pilas y Acumuladores",
+    "nameEN": "Batteries and Accumulators",
+    "color": "orange",
+    "defCA": "En aquest contenidor es dipositen les piles i bateries esgotades o espatllades.",
+    "defES": "En este contenedor se depositan las pilas y baterías agotadas o estropeadas.",
+    "defEN": "Batteries and exhausted or damaged acummulators are deposited in this container."
+  },
+  {
+    "id": 7,
+    "nameCA": "Medicaments",
+    "nameES": "Medicamentos",
+    "nameEN": "Medicines",
+    "color": "turquoise",
+    "defCA": "En aquest contenidor es dipositen els medicaments caducats o que ja no es necessiten. Solen estar situats en les farmàcies.",
+    "defES": "En este contenedor se depositan los medicamentos caducados o que ya no se necesitan. Suelen estar ubicados en las farmacias.",
+    "defEN": "This container is used to dispose of medicines that have expired or are no longer needed. They are usually located in pharmacies."
+  },
+  {
+    "id": 8,
+    "nameCA": "Deixalleria",
+    "nameES": "Punto Limpio",
+    "nameEN": "Recycling Center",
+    "color": "red",
+    "defCA": "La deixalleria és una instal·lació municipal que permet fer la recollida selectiva d'aquelles fraccions de residus municipals per a les quals no hi ha un sistema de recollida domiciliària. A més a més de les deixalleries, també existeixen les deixalleries mòbils i les minideixalleries. Els residus d'acceptació obligatòria per part d'una deixalleria són els residus municipals, els residus especials, els residus municipals voluminosos (electrodomèstics que no contenen substàncies perilloses i mobles) i altres residus (fustes, restes de jardí i runes provinents d'obres menors).",
+    "defES": "Un punto limpio es una instalación municipal que permite hacer la recogida selectiva de aquellas fracciones de residuos municipales para las cuales no hay un sistema de recogida domiciliaria. Además de los puntos limpios, también existen los puntos limpios móviles y pequeños. Los residuos de aceptación obligatoria por parte de una desechería son los residuos municipales, los residuos especiales, los residuos municipales voluminosos (electrodomésticos que no contienen sustancias peligrosas y muebles) y otros residuos (maderas, restos de jardín y escombros provenientes de obras menores).",
+    "defEN": "A municipal waste collection centre is a municipal facility that enables the selective collection of those municipal waste fractions for which there is no household collection system. In addition to the waste collection centres, there are also mobile and small waste collection centres. The waste that must be accepted by a waste disposal plant is municipal waste, special waste, bulky municipal waste (household appliances that do not contain hazardous substances and furniture) and other waste (wood, garden waste and rubble from minor construction work)."
+  },
+  {
+    "id": 9,
+    "nameCA": "Roba",
+    "nameES": "Ropa",
+    "nameEN": "Clothes",
+    "color": "beige",
+    "defCA": "En aquest contenidor es dipositen les peces de roba o calçat que ja no es pot utilitzar perquè sigui reciclat correctament o pugui ser un producte de segona mà o per a ONGs.",
+    "defES": "En este contenedor se depositan las prendas de ropa o calzado que ya no se puede utilizar para que sea reciclado correctamente o pueda ser un producto de segunda mano o para ONGs.",
+    "defEN": "In this container, clothing or footwear that can no longer be used is deposited so that it can be recycled correctly or can be a second-hand product or for NGOs."
+  },
+  {
+    "id": 10,
+    "nameCA": "Especial",
+    "nameES": "Especial",
+    "nameEN": "Special",
+    "color": "black",
+    "defCA": "En aquest contenidor s'ha de dipositar els residus perillosos o que necessiten d'un tractament específic com fluorescents i llums de vapor de mercuri, pneumàtics, bateries de cotxe, dissolvents, pintures i vernissos, frigorífics i electrodomèstics i olis minerals de particular.",
+    "defES": "En este contenedor se tiene que depositar los residuos peligrosos o que necesitan de un tratamiento específico como fluorescentes y luces de vapor de mercurio, neumáticos, baterías de coche, disolventes, pinturas y barnices, frigoríficos y electrodomésticos y óleos minerales de particular.",
+    "defEN": "Hazardous waste or waste requiring specific treatment such as fluorescent and mercury vapour lights, tyres, car batteries, solvents, paints and varnishes, refrigerators and household appliances and mineral oils from private households should be deposited in this container."
+  }
+]

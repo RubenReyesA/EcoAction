@@ -1,0 +1,51 @@
+.default {
+    display: inline-block;
+    background-repeat:round;
+    height: 15vh;
+    width: 40vw;
+    margin-right: 0;
+    margin-left: 3vw;
+}
+
+.cardR1 {
+    background-image: url('../../public/assets/images/reward/1.svg');
+}
+
+.cardR2 {
+    background-image: url('../../public/assets/images/reward/2.svg');
+}
+.cardR3 {
+    background-image: url('../../public/assets/images/reward/3.svg');
+}
+
+.cardR4 {
+    background-image: url('../../public/assets/images/reward/4.svg');
+}
+.cardR5 {
+    background-image: url('../../public/assets/images/reward/5.svg');
+}
+
+.cardR6 {
+    background-image: url('../../public/assets/images/reward/6.svg');
+}
+.cardR7 {
+    background-image: url('../../public/assets/images/reward/7.svg');
+}
+
+.cardR8 {
+    background-image: url('../../public/assets/images/reward/8.svg');
+}
+.cardR9 {
+    background-image: url('../../public/assets/images/reward/9.svg');
+}
+
+.cardR10 {
+    background-image: url('../../public/assets/images/reward/10.svg');
+}
+.cardR11 {
+    background-image: url('../../public/assets/images/reward/11.svg');
+}
+
+.cardR12 {
+    background-image: url('../../public/assets/images/reward/12.svg');
+}

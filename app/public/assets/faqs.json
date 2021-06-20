@@ -1,0 +1,17 @@
+[
+    {
+        "id": 0,
+        "q": "Què són els productes reciclats?",
+        "a": "Es caracteritzen per estar fabricats a partir de materials reciclats o bé part dels seus components provenen del reaprofitament d'altres productes fora d'ús."
+    },
+    {
+        "id": 1,
+        "q": "Què són els productes reciclables?",
+        "a": "Es caracteritzen per estar fabricats de forma que al finalitzar la seva vida útil puguin ser incorporats en nous cicles productius ja sigui en forma de subproductes o bé com a matèries primeres de nous productes mitjançant el reciclatge."
+    },
+    {
+        "id": 2,
+        "q": "Què vol dir comprar reciclat?",
+        "a": "La compra de productes reciclats/reciclables i/o biodegradables s'emmarca dins de l'estratègia de compra ambientalment correcta, o també coneguda com a compra verda; la qual incorpora l'adquisició de productes i serveis respectuosos amb el medi ambient."
+    }
+]

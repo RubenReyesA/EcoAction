@@ -1,0 +1,7 @@
+{
+  "name": "EcoAction",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
