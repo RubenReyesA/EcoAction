@@ -124,16 +124,11 @@ exports.searchBarcode = async function(req, res) {
             throw err;
 
           }
-          // result is an array consisting of messages collected
-          //during execution of script.
 
           let v = res.toString();
 
           let results = JSON.parse(v.substring(2));
 
-          /*for (var i = 0; i < results.length; i++) {
-            console.log(results[i]["residuID"] + " --> " + results[i]["prob"]);
-          }*/
 
           var toSend = {
             'pathIMG': savePath.substring(1),

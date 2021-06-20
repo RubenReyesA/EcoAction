@@ -62,20 +62,26 @@ exports.generateNewWallet = async function(hashedPass, mail) {
   return true;
 }
 
-exports.updateTokensforAchievements = async function(mail, price, res) {
+exports.updateTokensforAchievements = async function(mail, price, res, identifier) {
   dbFunctions.getJSONWallet(mail).then((wallet) => {
 
     try {
-      let enc2 = web3.eth.accounts.wallet.decrypt([wallet], process.env.ACHIEVEMENTS_PASS)[0];
+      const enc2 = web3.eth.accounts.wallet.decrypt([wallet], process.env.ACHIEVEMENTS_PASS)[0];
 
       dbFunctions.getAdminJSONWallet().then((adminWallet) => {
 
         try {
-          let adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[0];
+          const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[1];
 
-          dbFunctions.getTokenAddressIntern('77129516m').then((addr) => {
+          dbFunctions.getTokenAddressIntern(identifier).then((addr) => {
 
-            let q2 = parseInt(price * 0.00001 * 1e18);
+            const q2 = parseInt(price * 0.00001 * 1e18);
+
+            console.log(adminEnc2.address);
+            console.log(adminEnc2);
+            console.log(enc2.address);
+            console.log(addr);
+            console.log(q2);
 
             (async () => {
 
@@ -95,27 +101,30 @@ exports.updateTokensforAchievements = async function(mail, price, res) {
                   res.send("confirmedAch");
                 }).catch((e) => {
                   console.log("Error => " + e);
+                  res.send("Error");
                 });
 
               } catch (e) {
                 console.log(e);
-
+                res.send("Error");
               }
             })();
 
           }).catch((e) => {
             console.log("Error => " + e)
-
+            res.send("Error");
           });
 
 
         } catch (e) {
           console.log(e);
+          res.send("Error");
         }
       })
 
     } catch (e) {
       console.log("Error => " + e);
+      res.send("Error");
     }
   })
 
@@ -127,16 +136,16 @@ exports.updateTokens = async function(req, res) {
   dbFunctions.getJSONWallet(req.body[1]).then((wallet) => {
 
     try {
-      let enc2 = web3.eth.accounts.wallet.decrypt([wallet], req.body[2])[0];
+      const enc2 = web3.eth.accounts.wallet.decrypt([wallet], req.body[2])[0];
 
       dbFunctions.getAdminJSONWallet().then((adminWallet) => {
 
         try {
-          let adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[0];
+          const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[1];
 
           dbFunctions.getTokenAddressIntern(req.body[0]).then((addr) => {
 
-            let q2 = parseInt(req.body[3] * 0.00001 * 1e18);
+            const q2 = parseInt(req.body[3] * 0.00001 * 1e18);
 
             (async () => {
 
@@ -196,11 +205,13 @@ exports.redeemCode = async function(req, res) {
       dbFunctions.getAdminJSONWallet().then((adminWallet) => {
 
         try {
-          let adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[0];
+          const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[0];
+
+          console.log(adminEnc2);
 
           dbFunctions.getTokenAddressfromAwardID(req.query.id).then((addr) => {
 
-            let q2 = parseInt(req.query.price * 0.00001 * 1e18);
+            const q2 = parseInt(req.query.price * 0.00001 * 1e18);
 
             (async () => {
 

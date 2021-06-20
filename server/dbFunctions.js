@@ -233,15 +233,15 @@ exports.exchangeAchievement = async function(req, res) {
 
   user.get().then(doc => {
 
-    let ach = doc.data().achievements;
+    /*let ach = doc.data().achievements;
 
     ach[req.query.id] = true;
 
     user.update({
       achievements: ach
-    })
+    })*/
 
-    tokenFunctions.updateTokensforAchievements('achievements@ecoaction.com', req.query.p, res);
+    tokenFunctions.updateTokensforAchievements('achievements@ecoaction.com', req.query.p, res, req.query.identifier);
   });
 
 }
@@ -338,4 +338,9 @@ exports.getTokenAddressfromAwardID = async function(id) {
 exports.getAdminJSONWallet = async function() {
   const admin = await db.collection('defaultData').doc('admin').get();
   return admin.data()['wallet'];
+}
+
+exports.getAdminTokenAddress = async function() {
+  const admin = await db.collection('defaultData').doc('admin').get();
+  return admin.data()['tokenAddress'];
 }
