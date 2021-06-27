@@ -41,6 +41,7 @@ import { NativeStorage } from "@ionic-native/native-storage";
 
 import { defineComponent } from "vue";
 import { Keyboard } from "@ionic-native/keyboard";
+import axios from "axios";
 import { ScreenOrientation } from "@ionic-native/screen-orientation";
 
 export default defineComponent({
@@ -64,13 +65,13 @@ export default defineComponent({
     NativeStorage.remove("administrator");
     Keyboard.onKeyboardWillShow().subscribe(() => {
       setTimeout(() => {
-      this.control = false;
-      },250);
+        this.control = false;
+      }, 250);
     });
     Keyboard.onKeyboardWillHide().subscribe(() => {
       setTimeout(() => {
-      this.control = true;
-      },250);
+        this.control = true;
+      }, 250);
     });
     ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT);
   },

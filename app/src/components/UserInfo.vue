@@ -293,7 +293,7 @@ export default defineComponent({
           loading.present();
 
           axios({
-            url: "http://192.168.1.41:3013/getStats?mail=" + this.mail,
+            url: "http://10.144.3.190:3013/getStats?mail=" + this.mail,
             method: "get",
           }).then((response) => {
             this.achievements = response.data[0];

@@ -293,7 +293,7 @@ export default defineComponent({
               fileTransfer
                 .upload(
                   imageData,
-                  encodeURI("http://192.168.1.41:3013/uploadImage"),
+                  encodeURI("http://10.144.3.190:3013/uploadImage"),
                   {
                     fileKey: "myImage",
                     fileName: "file",
@@ -306,7 +306,7 @@ export default defineComponent({
                 .then((data) => {
                   const response = JSON.parse(data.response);
 
-                  this.img = "http://192.168.1.41:3013" + response["pathIMG"];
+                  this.img = "http://10.144.3.190:3013" + response["pathIMG"];
 
                   this.results = response["results"];
 

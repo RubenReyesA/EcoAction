@@ -247,7 +247,7 @@ export default defineComponent({
           if (url == this.getURL()) {
             axios({
               url:
-                "http://192.168.1.41:3013/updateStats?mail=" +
+                "http://10.144.3.190:3013/updateStats?mail=" +
                 this.mail +
                 "&type=call",
               method: "get",
@@ -267,7 +267,7 @@ export default defineComponent({
             if (url == this.getURL()) {
               axios({
                 url:
-                  "http://192.168.1.41:3013/updateStats?mail=" +
+                  "http://10.144.3.190:3013/updateStats?mail=" +
                   this.mail +
                   "&type=gps",
                 method: "get",
@@ -288,7 +288,7 @@ export default defineComponent({
           if (url == this.getURL()) {
             axios({
               url:
-                "http://192.168.1.41:3013/updateStats?mail=" +
+                "http://10.144.3.190:3013/updateStats?mail=" +
                 this.mail +
                 "&type=web",
               method: "get",

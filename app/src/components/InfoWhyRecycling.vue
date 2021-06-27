@@ -5,19 +5,45 @@
         <IonButtons>
           <ion-back-button :text="messages[idioma]['backText']" />
         </IonButtons>
-        <ion-title>{{messages[idioma]['faqsTitle2']}}</ion-title>
+        <ion-title>{{ messages[idioma]["faqsTitle2"] }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true" class="ion-padding">
-      <ion-card v-for="f in faqs" :key="f['id']">
-        <ion-card-header>
-          <ion-card-title style="font-size:20px" text-wrap> {{f['q']}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content> {{f['a']}}</ion-card-content>
-      </ion-card>
-      
-       </ion-content>
+
+      <div v-if="idioma == 'es'">
+        <ion-card v-for="f in faqs" :key="f['id']">
+          <ion-card-header>
+            <ion-card-title style="font-size: 20px" text-wrap>
+              {{ f["qES"] }}</ion-card-title
+            >
+          </ion-card-header>
+          <ion-card-content> {{ f["aES"] }}</ion-card-content>
+        </ion-card>
+      </div>
+
+      <div v-if="idioma == 'ca'">
+        <ion-card v-for="f in faqs" :key="f['id']">
+          <ion-card-header>
+            <ion-card-title style="font-size: 20px" text-wrap>
+              {{ f["qCA"] }}</ion-card-title
+            >
+          </ion-card-header>
+          <ion-card-content> {{ f["aCA"] }}</ion-card-content>
+        </ion-card>
+      </div>
+
+      <div v-if="idioma == 'en'">
+        <ion-card v-for="f in faqs" :key="f['id']">
+          <ion-card-header>
+            <ion-card-title style="font-size: 20px" text-wrap>
+              {{ f["qEN"] }}</ion-card-title
+            >
+          </ion-card-header>
+          <ion-card-content> {{ f["aEN"] }}</ion-card-content>
+        </ion-card>
+      </div>
+    </ion-content>
   </ion-page>
 </template>
 

@@ -1,6 +1,6 @@
 exports.pass = process.env.SMARTCONTRACT_PASS;
 
-exports.contractAddr = "0x3De3d9802380390F39774162717818dF5a2afAaF";
+exports.contractAddr = "0xaA76b66eaa1EeAe2Bb58fBd4e12F2fA0e04BbdCA";
 exports.ABITest = [{
     "inputs": [{
         "internalType": "address",
@@ -229,6 +229,28 @@ exports.ABITest = [{
         "type": "bool"
       }
     ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "name",
+    "outputs": [{
+      "internalType": "string",
+      "name": "",
+      "type": "string"
+    }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [{
+      "internalType": "string",
+      "name": "",
+      "type": "string"
+    }],
     "stateMutability": "view",
     "type": "function"
   }

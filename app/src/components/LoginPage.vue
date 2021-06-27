@@ -168,7 +168,7 @@ export default defineComponent({
     },
     getUserName: function () {
       axios({
-        url: "http://192.168.1.41:3013/getUserName?mail=" + this.mail,
+        url: "http://10.144.3.190:3013/getUserName?mail=" + this.mail,
         method: "get",
       }).then((response) => {
         NativeStorage.setItem("login", response.data);
@@ -177,7 +177,7 @@ export default defineComponent({
     },
     getTokenAddress: function () {
       axios({
-        url: "http://192.168.1.41:3013/getTokenAddress?mail=" + this.mail,
+        url: "http://10.144.3.190:3013/getTokenAddress?mail=" + this.mail,
         method: "get",
       }).then((response) => {
         NativeStorage.setItem("tokenAddress", response.data);
@@ -193,7 +193,7 @@ export default defineComponent({
             this.control = loading;
             loading.present();
             axios({
-              url: "http://192.168.1.41:3013/loginUser",
+              url: "http://10.144.3.190:3013/loginUser",
               method: "post",
               headers: { Accept: "application/json" },
               data: {

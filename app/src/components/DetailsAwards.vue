@@ -238,13 +238,14 @@ export default defineComponent({
       mail: "",
       comission: "0",
       total: "0",
+      com:"0",
     };
   },
   watch: {
     quantitySelected: function () {
       axios({
         url:
-          "http://192.168.1.41:3013/getGasEstimation?method=send&addr=" +
+          "http://10.144.3.190:3013/getGasEstimation?method=send&addr=" +
           this.tokenAddress +
           "&q=" +
           this.quantities[this.quantitySelected].toString() +
@@ -262,6 +263,8 @@ export default defineComponent({
           const totalF =
             parseFloat(this.quantitySelected.toString()) +
             parseFloat(response2.data[1]);
+                      this.com = totalT;
+
 
           this.total = totalT + " EAs - " + totalF + " ";
         })
@@ -281,7 +284,7 @@ export default defineComponent({
           loading.present();
           axios({
             url:
-              "http://192.168.1.41:3013/getBalance?tokenAddress=" +
+              "http://10.144.3.190:3013/getBalance?tokenAddress=" +
               this.tokenAddress +
               "&currency=" +
               this.currency,
@@ -289,7 +292,7 @@ export default defineComponent({
           })
             .then((response) => {
               axios({
-                url: "http://192.168.1.41:3013/getQuantities",
+                url: "http://10.144.3.190:3013/getQuantities",
                 method: "get",
               }).then((response2) => {
                 this.quantities = {};
@@ -344,6 +347,10 @@ export default defineComponent({
     },
     buy: function () {
       if (this.quantitySelected != "") {
+        if(parseInt(this.com) > parseInt(this.tokenBalance)){
+          alert("Error");
+        }
+        else{
         loadingController
           .create({
             message: this.messages[this.idioma]["exchangeSuccess"],
@@ -354,7 +361,7 @@ export default defineComponent({
 
             axios({
               url:
-                "http://192.168.1.41:3013/redeemCode?id=" +
+                "http://10.144.3.190:3013/redeemCode?id=" +
                 this.idAward +
                 "&name=" +
                 this.name +
@@ -378,6 +385,7 @@ export default defineComponent({
             this.controlSend.dismiss();
             this.goBack();
           });
+        }
       } else {
         alert("Error");
       }

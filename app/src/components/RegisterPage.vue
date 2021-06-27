@@ -337,7 +337,7 @@ export default defineComponent({
             this.control = loading;
             loading.present();
             axios({
-              url: "http://192.168.1.41:3013/registerUser",
+              url: "http://10.144.3.190:3013/registerUser",
               method: "post",
               headers: { Accept: "application/json" },
               data: {

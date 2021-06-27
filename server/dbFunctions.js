@@ -113,6 +113,20 @@ exports.getTokenAddressIntern = async function(id) {
   return r;
 }
 
+exports.getMailfromID = async function(id) {
+  const users = await db.collection('users').get();
+
+  let r = null;
+
+  await users.forEach((doc) => {
+    if (doc.data()['identifier'] == id) {
+      r = doc.data().mail;
+    }
+  });
+
+  return r;
+}
+
 exports.saveTokenAddress = function(mail, addr) {
   console.log(mail, addr);
   db.collection('users').doc(mail).set({
@@ -233,15 +247,16 @@ exports.exchangeAchievement = async function(req, res) {
 
   user.get().then(doc => {
 
-    /*let ach = doc.data().achievements;
+    let ach = doc.data().achievements;
 
     ach[req.query.id] = true;
 
     user.update({
       achievements: ach
-    })*/
+    })
 
     tokenFunctions.updateTokensforAchievements('achievements@ecoaction.com', req.query.p, res, req.query.identifier);
+
   });
 
 }
@@ -262,7 +277,6 @@ let initializeAchievementsandStats = async function(m) {
 
   let json2 = {
     'call': 0,
-    'faq': 0,
     'gps': 0,
     'receive': 0,
     'reward': 0,
@@ -305,11 +319,7 @@ exports.updateStatsIntern = async function(m, t, opt) {
 
     let sts = doc.data().stats;
 
-    if (t == "receive") {
-      sts[t] = opt;
-    } else {
-      sts[t] += 1;
-    }
+    sts[t] += 1;
 
     user.update({
       stats: sts

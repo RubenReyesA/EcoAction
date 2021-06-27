@@ -1,17 +1,30 @@
-[
-    {
-        "id": 0,
-        "q": "Què són els productes reciclats?",
-        "a": "Es caracteritzen per estar fabricats a partir de materials reciclats o bé part dels seus components provenen del reaprofitament d'altres productes fora d'ús."
-    },
-    {
-        "id": 1,
-        "q": "Què són els productes reciclables?",
-        "a": "Es caracteritzen per estar fabricats de forma que al finalitzar la seva vida útil puguin ser incorporats en nous cicles productius ja sigui en forma de subproductes o bé com a matèries primeres de nous productes mitjançant el reciclatge."
-    },
-    {
-        "id": 2,
-        "q": "Què vol dir comprar reciclat?",
-        "a": "La compra de productes reciclats/reciclables i/o biodegradables s'emmarca dins de l'estratègia de compra ambientalment correcta, o també coneguda com a compra verda; la qual incorpora l'adquisició de productes i serveis respectuosos amb el medi ambient."
-    }
+[{
+    "id": 0,
+    "qCA": "Què són els productes reciclats?",
+    "aCA": "Es caracteritzen per estar fabricats a partir de materials reciclats o bé part dels seus components provenen del reaprofitament d'altres productes fora d'ús.",
+    "qES": "¿Qué son los productos reciclados?",
+    "aES": "Se caracterizan por estar fabricados a partir de materiales reciclados o bien parte de sus componentes provienen del reaprovechamiento de otros productos fuera de uso.",
+    "qEN": "What are recycled products?",
+    "aEN": "They are characterised by the fact that they are made from recycled materials or part of their components come from the reuse of other end-of-life products."
+  },
+  {
+    "id": 1,
+    "qCA": "Què són els productes reciclables?",
+    "aCA": "Es caracteritzen per estar fabricats de forma que al finalitzar la seva vida útil puguin ser incorporats en nous cicles productius ja sigui en forma de subproductes o bé com a matèries primeres de nous productes mitjançant el reciclatge.",
+    "qES": "¿Qué son los productos reciclables?",
+    "aES": "Se caracterizan por estar fabricados de forma que al finalizar su vida útil puedan ser incorporados en nuevos ciclos productivos ya sea en forma de subproductos o bien como materia prima de nuevos productos mediante el reciclaje.",
+    "qEN": "What are recyclable products?",
+    "aEN": "They are characterised by being manufactured in such a way that at the end of their useful life they can be incorporated into new production cycles either in the form of by-products or as raw material for new products through recycling."
+
+  },
+  {
+    "id": 2,
+    "qCA": "Què vol dir comprar un producte reciclat?",
+    "aCA": "La compra de productes reciclats/reciclables i/o biodegradables s'emmarca dins de l'estratègia de compra ambientalment correcta, o també coneguda com a compra verda; la qual incorpora l'adquisició de productes i serveis respectuosos amb el medi ambient.",
+    "qES": "¿Qué quiere decir comprar un producto reciclado?",
+    "aES": "La compra de productos reciclados/reciclables y/o biodegradables se enmarca dentro de la estrategia de compra ambientalmente correcta, o también conocida como compra verde; la cual incorpora la adquisición de productos y servicios respetuosos con el medio ambiente.",
+    "qEN": "What does it mean to buy a recycled product?",
+    "aEN": "The purchase of recycled/recyclable and/or biodegradable products is part of the environmentally sound purchasing strategy, also known as green purchasing, which incorporates the purchase of environmentally friendly products and services."
+
+  }
 ]

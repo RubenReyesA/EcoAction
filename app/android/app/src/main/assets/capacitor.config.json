@@ -1,0 +1,13 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "EcoAction",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1000
+    }
+  },
+  "cordova": {}
+}

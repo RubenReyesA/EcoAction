@@ -84,7 +84,7 @@
             </ion-row>
             <ion-row>
               <ion-col class="midCol sendCol">
-                <ion-input type="text" v-model="identifier"></ion-input>
+                <ion-input type="text" v-model="identifier" :disabled="verified"></ion-input>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -185,7 +185,6 @@ export default defineComponent({
     IonCardSubtitle,
     IonSegmentButton,
   },
-  props: ["b", "t", "m"],
   data: function () {
     return {
       messages: {
@@ -196,6 +195,8 @@ export default defineComponent({
       idioma: "es",
       currency: "eur",
       tokenInput: 0,
+      t: "",
+      m: "",
       fiatInput: 0,
       changePrice: "",
       controlInfo: null,
@@ -204,6 +205,7 @@ export default defineComponent({
       disableTokens: false,
       disableFiat: true,
       identifier: "",
+      myidentifier: "",
       comission: "0",
       total: "0",
       dataCorrect: false,
@@ -242,21 +244,25 @@ export default defineComponent({
   },
   methods: {
     checkIdentifier: function (id) {
-      const num = parseInt(id.substring(0, id.length - 1));
-      const letter = id.substring(id.length - 1, id.length);
+      if (id == this.myidentifier) {
+        return false;
+      } else {
+        const num = parseInt(id.substring(0, id.length - 1));
+        const letter = id.substring(id.length - 1, id.length);
 
-      const r = num % 23;
+        const r = num % 23;
 
-      return (
-        this.checker[r] == letter.toLowerCase() ||
-        this.checker[r] == letter.toUpperCase()
-      );
+        return (
+          this.checker[r] == letter.toLowerCase() ||
+          this.checker[r] == letter.toUpperCase()
+        );
+      }
     },
     checkData: function () {
       if (this.correctInput) {
         if (this.checkIdentifier(this.identifier)) {
           axios({
-            url: "http://192.168.1.41:3013/checkID?id=" + this.identifier,
+            url: "http://10.144.3.190:3013/checkID?id=" + this.identifier,
             method: "get",
           })
             .then((response) => {
@@ -284,19 +290,85 @@ export default defineComponent({
             this.controlSend = loading;
             loading.present();
             axios({
-              url: "http://192.168.1.41:3013/updateTokens",
+              url: "http://10.144.3.190:3013/updateTokens",
               method: "post",
               data: [this.identifier, this.m, sha224(pass), this.tokenInput],
             }).then((response) => {
               this.controlSend.dismiss();
               alert(this.messages[this.idioma][response.data]);
+              this.goBack();
             });
           })
           .catch((err) => {
             this.controlSend.dismiss();
             alert("Error: " + err);
+            this.goBack();
           });
       }
+    },
+    loadData: function () {
+      loadingController
+        .create({
+          message: this.messages[this.idioma]["loadingData"],
+        })
+        .then((loading) => {
+          this.controlInfo = loading;
+          loading.present();
+          axios({
+            url:
+              "http://10.144.3.190:3013/getEthPrice?currency=" + this.currency,
+            method: "get",
+          })
+            .then((response) => {
+              this.changePrice = parseFloat(response.data);
+              axios({
+                url:
+                  "http://10.144.3.190:3013/getBalance?tokenAddress=" +
+                  this.t +
+                  "&currency=" +
+                  this.currency,
+                method: "get",
+              })
+                .then((response2) => {
+                  this.balance = response2.data[0];
+                  axios({
+                    url:
+                      "http://10.144.3.190:3013/getGasEstimation?method=send&addr=" +
+                      this.t +
+                      "&q=" +
+                      this.tokenInput +
+                      "&currency=" +
+                      this.currency,
+                    method: "get",
+                  })
+                    .then((response3) => {
+                      this.comission =
+                        response3.data[0] + " EAs - " + response3.data[1] + " ";
+
+                      const totalT =
+                        parseInt(this.tokenInput) + parseInt(response3.data[0]);
+                      const totalF =
+                        parseFloat(this.fiatInput) +
+                        parseFloat(response3.data[1]);
+
+                      this.total = totalT + " EAs - " + totalF + " ";
+                      this.controlInfo.dismiss();
+                    })
+                    .catch((err) => {
+                      console.log("Error => " + err);
+                      this.controlInfo.dismiss();
+                    });
+                })
+                .catch((err) => {
+                  console.log("Error => " + err);
+                  this.controlInfo.dismiss();
+                });
+            })
+            .catch((err) => {
+              console.log("Error => " + err);
+              this.controlInfo.dismiss();
+            });
+        });
     },
   },
   watch: {
@@ -320,7 +392,7 @@ export default defineComponent({
           this.cardStyle = this.cardGreen;
           axios({
             url:
-              "http://192.168.1.41:3013/getGasEstimation?method=send&addr=" +
+              "http://10.144.3.190:3013/getGasEstimation?method=send&addr=" +
               this.t +
               "&q=" +
               this.tokenInput +
@@ -330,10 +402,14 @@ export default defineComponent({
           })
             .then((response2) => {
               this.comission =
-                response2.data[0] + " EAs - " + response2.data[1] + " ";
+                Math.ceil(parseInt(response2.data[0])) +
+                " EAs - " +
+                response2.data[1] +
+                " ";
 
               const totalT =
-                parseInt(this.tokenInput) + parseInt(response2.data[0]);
+                parseInt(this.tokenInput) +
+                Math.ceil(parseInt(response2.data[0]));
               const totalF =
                 parseFloat(this.fiatInput) + parseFloat(response2.data[1]);
 
@@ -365,71 +441,16 @@ export default defineComponent({
       }
     },
   },
-  mounted: async function () {
+  ionViewDidEnter: function () {
     NativeStorage.getItem("idioma").then((x) => (this.idioma = x));
-    await NativeStorage.getItem("currency").then((x) => (this.currency = x));
+    NativeStorage.getItem("currency").then((x) => (this.currency = x));
+    NativeStorage.getItem("login").then((res) => {
+      this.t = res["tokenAddress"];
+      this.m = res["mail"];
+      this.myidentifier = res["identifier"];
 
-    loadingController
-      .create({
-        message: this.messages[this.idioma]["loadingData"],
-      })
-      .then((loading) => {
-        this.controlInfo = loading;
-        loading.present();
-        axios({
-          url: "http://192.168.1.41:3013/getEthPrice?currency=" + this.currency,
-          method: "get",
-        })
-          .then((response) => {
-            this.changePrice = parseFloat(response.data);
-            axios({
-              url:
-                "http://192.168.1.41:3013/getBalance?tokenAddress=" +
-                this.t +
-                "&currency=" +
-                this.currency,
-              method: "get",
-            })
-              .then((response2) => {
-                this.balance = response2.data[0];
-                axios({
-                  url:
-                    "http://192.168.1.41:3013/getGasEstimation?method=send&addr=" +
-                    this.t +
-                    "&q=" +
-                    this.tokenInput +
-                    "&currency=" +
-                    this.currency,
-                  method: "get",
-                })
-                  .then((response3) => {
-                    this.comission =
-                      response3.data[0] + " EAs - " + response3.data[1] + " ";
-
-                    const totalT =
-                      parseInt(this.tokenInput) + parseInt(response3.data[0]);
-                    const totalF =
-                      parseFloat(this.fiatInput) +
-                      parseFloat(response3.data[1]);
-
-                    this.total = totalT + " EAs - " + totalF + " ";
-                    this.controlInfo.dismiss();
-                  })
-                  .catch((err) => {
-                    console.log("Error => " + err);
-                    this.controlInfo.dismiss();
-                  });
-              })
-              .catch((err) => {
-                console.log("Error => " + err);
-                this.controlInfo.dismiss();
-              });
-          })
-          .catch((err) => {
-            console.log("Error => " + err);
-            this.controlInfo.dismiss();
-          });
-      });
+      this.loadData();
+    });
   },
   setup: function () {
     const router = useRouter();

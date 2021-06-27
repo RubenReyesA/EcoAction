@@ -58,8 +58,6 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: "send",
             component: SendPage,
-            name: "send",
-            props: true,
           },
           {
             path: "receive",

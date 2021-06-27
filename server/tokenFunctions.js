@@ -66,38 +66,40 @@ exports.updateTokensforAchievements = async function(mail, price, res, identifie
   dbFunctions.getJSONWallet(mail).then((wallet) => {
 
     try {
-      const enc2 = web3.eth.accounts.wallet.decrypt([wallet], process.env.ACHIEVEMENTS_PASS)[0];
+      const tokenAddrEnc2 = wallet['address'];
+      const prefixEnc2 = '0x';
+      const enc2 = web3.eth.accounts.wallet.decrypt([wallet], process.env.ACHIEVEMENTS_PASS)[prefixEnc2.concat(tokenAddrEnc2)];
 
       dbFunctions.getAdminJSONWallet().then((adminWallet) => {
 
         try {
-          const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[1];
+          const tokenAddrAdminEnc2 = adminWallet['address'];
+          const prefixAdminEnc2 = '0x';
+          const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[prefixAdminEnc2.concat(tokenAddrAdminEnc2)];
 
           dbFunctions.getTokenAddressIntern(identifier).then((addr) => {
 
             const q2 = parseInt(price * 0.00001 * 1e18);
 
-            console.log(adminEnc2.address);
-            console.log(adminEnc2);
-            console.log(enc2.address);
-            console.log(addr);
-            console.log(q2);
-
             (async () => {
 
               try {
                 const contract = new web3.eth.Contract(smartContract.ABITest, smartContract.contractAddr);
-                const gasPrice = await web3.eth.getGasPrice();
-                const gasEstimate = await contract.methods.tokenTransfer(enc2.address, addr, q2.toString(), q2.toString(), getTimeStampIntern()).estimateGas({
+                /*const gasEstimate = await contract.methods.tokenTransfer(enc2.address, addr, q2.toString(), q2.toString(), getTimeStampIntern()).estimateGas({
                   from: adminEnc2.address
-                });
+                });*/
+                const gasPrice = await web3.eth.getGasPrice();
 
-                contract.methods.tokenTransfer(enc2.address, addr, q2.toString(), gasEstimate, getTimeStampIntern()).send({
+                const gasEstimate = 400000;
+
+                contract.methods.tokenTransfer(enc2.address, addr, q2.toString(), (gasEstimate * gasPrice).toString(), getTimeStampIntern()).send({
                   from: adminEnc2.address,
                   gasPrice: gasPrice,
                   gas: gasEstimate
-                }).then((q) => {
+                }).then(async function(q) {
                   console.log(q);
+                  let mailtoUpdate = await dbFunctions.getMailfromID(identifier);
+                  dbFunctions.updateStatsIntern(mailtoUpdate, "receive");
                   res.send("confirmedAch");
                 }).catch((e) => {
                   console.log("Error => " + e);
@@ -136,35 +138,45 @@ exports.updateTokens = async function(req, res) {
   dbFunctions.getJSONWallet(req.body[1]).then((wallet) => {
 
     try {
-      const enc2 = web3.eth.accounts.wallet.decrypt([wallet], req.body[2])[0];
+      const tokenAddrEnc2 = wallet['address'];
+      const prefixEnc2 = '0x';
+      const enc2 = web3.eth.accounts.wallet.decrypt([wallet], req.body[2])[prefixEnc2.concat(tokenAddrEnc2)];
 
       dbFunctions.getAdminJSONWallet().then((adminWallet) => {
 
         try {
-          const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[1];
+          const tokenAddrAdminEnc2 = adminWallet['address'];
+          const prefixAdminEnc2 = '0x';
+          const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[prefixAdminEnc2.concat(tokenAddrAdminEnc2)];
 
           dbFunctions.getTokenAddressIntern(req.body[0]).then((addr) => {
 
             const q2 = parseInt(req.body[3] * 0.00001 * 1e18);
+
+            console.log(enc2.address);
+            console.log(addr);
+            console.log(adminEnc2.address);
+            console.log(req.body[1]);
+            console.log(req.body[0]);
 
             (async () => {
 
               try {
                 const contract = new web3.eth.Contract(smartContract.ABITest, smartContract.contractAddr);
                 const gasPrice = await web3.eth.getGasPrice();
-                const gasEstimate = await contract.methods.tokenTransfer(enc2.address, addr, q2.toString(), q2.toString(), getTimeStampIntern()).estimateGas({
-                  from: adminEnc2.address
-                });
+                const gasEstimate = 400000;
 
-                contract.methods.tokenTransfer(enc2.address, addr, q2.toString(), gasEstimate, getTimeStampIntern()).send({
+                contract.methods.tokenTransfer(enc2.address, addr, q2.toString(), (gasEstimate * gasPrice).toString(), getTimeStampIntern()).send({
                   from: adminEnc2.address,
                   gasPrice: gasPrice,
                   gas: gasEstimate
-                }).then((q) => {
+                }).then(async function(q) {
                   console.log(q);
                   res.send("updateTokensText");
 
                   dbFunctions.updateStatsIntern(req.body[1], "send");
+                  let mailtoUpdate = await dbFunctions.getMailfromID(req.body[0]);
+                  dbFunctions.updateStatsIntern(mailtoUpdate, "receive");
                 }).catch((e) => {
                   console.log("Error => " + e);
                   res.send("Error");
@@ -207,8 +219,6 @@ exports.redeemCode = async function(req, res) {
         try {
           const adminEnc2 = web3.eth.accounts.wallet.decrypt([adminWallet], smartContract.pass)[0];
 
-          console.log(adminEnc2);
-
           dbFunctions.getTokenAddressfromAwardID(req.query.id).then((addr) => {
 
             const q2 = parseInt(req.query.price * 0.00001 * 1e18);
@@ -218,17 +228,18 @@ exports.redeemCode = async function(req, res) {
               try {
                 const contract = new web3.eth.Contract(smartContract.ABITest, smartContract.contractAddr);
                 const gasPrice = await web3.eth.getGasPrice();
-                const gasEstimate = await contract.methods.tokenTransferAward(tokenAddr, addr, q2.toString(), q2.toString(), getTimeStampIntern()).estimateGas({
-                  from: adminEnc2.address
-                });
+                const gasEstimate = 400000;
 
-                contract.methods.tokenTransferAward(tokenAddr, addr, q2.toString(), gasEstimate, getTimeStampIntern()).send({
+
+                contract.methods.tokenTransferAward(tokenAddr, addr, q2.toString(), (gasEstimate * gasPrice).toString(), getTimeStampIntern()).send({
                   from: adminEnc2.address,
                   gasPrice: gasPrice,
                   gas: gasEstimate
                 }).then(async function(re) {
                   console.log(re);
                   let i = await mailFunctions.sendMailTo(req.query.id, req.query.name, req.query.mail, req.query.q, req.query.language);
+                  let mailtoUpdate = await dbFunctions.getMailfromID(req.query.id);
+                  dbFunctions.updateStatsIntern(mailtoUpdate, "reward");
                   res.send("exchangeSuccess");
                 }).catch((e) => {
                   console.log("Error => " + e);
@@ -292,12 +303,9 @@ exports.getRecentActivity = function(req, res) {
       var sendArray = [];
       var promises = [];
 
-      var countPositives = 0;
-
       for (let i = 0; i < size; i++) {
         promises[i] = contract.methods.itemAccounts(req.query.tokenAddress, i).call().then((res) => {
           if (res[3]) {
-            countPositives++;
             sendArray[i] = {
               name: res[0],
               date: res[1],
@@ -327,8 +335,6 @@ exports.getRecentActivity = function(req, res) {
         }
 
         res.send(sendArray.reverse());
-
-        dbFunctions.updateStatsIntern(req.query.mail, "receive", countPositives);
 
       }).catch(() => {
         res.send("Error");
@@ -374,14 +380,18 @@ exports.getGasEstimation = async function(req, res) {
   switch (req.query.method) {
     case 'send':
 
-      let q2 = parseInt(req.query.q * 0.00001 * 1e18);
+      /*let q2 = parseInt(req.query.q * 0.00001 * 1e18);
 
       const gasPrice = await web3.eth.getGasPrice();
       const gasEstimate = await contract.methods.tokenTransfer(req.query.addr, req.query.addr, q2.toString(), q2.toString(), getTimeStampIntern()).estimateGas({
         from: '0xf845D44fBf5d5a8c3D380a3d7Bdfc46f6E8038D0'
-      });
+      });*/
+
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasEstimate = 400000;
 
       let t = gasPrice * gasEstimate / 1e18 / 0.00001;
+
       let price = await getEthPriceIntern(req.query.currency.toUpperCase());
 
       resArray = [];

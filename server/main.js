@@ -50,10 +50,6 @@ app.get('/searchBarcode', visionFunctions.searchBarcode);
 
 app.get('/redeemCode', tokenFunctions.redeemCode);
 
-app.get('/test', function(req, res) {
-  res.send(process.env);
-})
-
 app.listen(port, () => {
   console.log(`Server app listening at http://localhost:${port}`)
 })

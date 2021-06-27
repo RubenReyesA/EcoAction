@@ -108,7 +108,7 @@
                 size="large"
                 class="useLondrina"
                 color="cyan"
-                @click="sendTokens"
+                @click="gotoSend"
                 ><ion-icon slot="start" :icon="cloudUploadOutline"></ion-icon>
                 {{ messages[idioma]["sendTitle"] }}</ion-button
               >
@@ -118,7 +118,7 @@
                 size="large"
                 class="useLondrina"
                 color="cyan"
-                @click="receiveTokens"
+                @click="gotoReceive"
                 ><ion-icon slot="start" :icon="cloudDownloadOutline"></ion-icon>
                 {{ messages[idioma]["receiveTitle"] }}</ion-button
               >
@@ -291,7 +291,7 @@ export default defineComponent({
         en: require("../../public/assets/i18n/en.json"),
       },
       idioma: "es",
-      currency: "",
+      currency: "eur",
     };
   },
   setup: function () {
@@ -320,7 +320,7 @@ export default defineComponent({
                       c = loading;
                       loading.present();
                       axios({
-                        url: "http://192.168.1.41:3013/loginUser",
+                        url: "http://10.144.3.190:3013/loginUser",
                         method: "post",
                         headers: { Accept: "application/json" },
                         data: {
@@ -374,7 +374,7 @@ export default defineComponent({
     };
 
     const gotoSend = (b1, t1, m1) => {
-      router.push({ name: "send", params: { b: b1, t: t1, m: m1 } });
+      router.push("/main/home/send");
     };
 
     const gotoReceive = () => {
@@ -400,18 +400,12 @@ export default defineComponent({
   methods: {
     startInfoLogin: function (i) {
       axios({
-        url: "http://192.168.1.41:3013/getAccountDetails?mail=" + i,
+        url: "http://10.144.3.190:3013/getAccountDetails?mail=" + i,
         method: "get",
       }).then((response) => {
         NativeStorage.setItem("login", response.data);
         this.updateDetails();
       });
-    },
-    sendTokens: function () {
-      this.gotoSend(this.user.balance, this.user.tokenAddress, this.user.mail);
-    },
-    receiveTokens: function () {
-      this.gotoReceive();
     },
     getBalances: function () {
       loadingController
@@ -423,7 +417,7 @@ export default defineComponent({
           loading.present();
           axios({
             url:
-              "http://192.168.1.41:3013/getBalance?tokenAddress=" +
+              "http://10.144.3.190:3013/getBalance?tokenAddress=" +
               this.user.tokenAddress +
               "&currency=" +
               this.currency,
@@ -452,7 +446,7 @@ export default defineComponent({
           loading.present();
           axios({
             url:
-              "http://192.168.1.41:3013/getRecentActivity?tokenAddress=" +
+              "http://10.144.3.190:3013/getRecentActivity?tokenAddress=" +
               this.user.tokenAddress +
               "&mail=" +
               this.user.mail,
@@ -481,14 +475,6 @@ export default defineComponent({
       }, 3000);
     },
     updateDetails: function () {
-      /*NativeStorage.setItem("login", {
-        name: "Rubén",
-        surname: "Reyes",
-        mail: "b@b.b",
-        tokenAddress: "0x3a64aC304Bc222475e8F92156F885b141d238c49",
-        identifier: "77129516M"
-      });*/
-
       NativeStorage.getItem("login")
         .then((res) => {
           this.user.name = res["name"];
@@ -501,7 +487,6 @@ export default defineComponent({
           EventBus.publish("checkBiometrics");
 
           this.showUser = true;
-
           this.updateInfoUser();
         })
         .catch(() => {
@@ -521,7 +506,14 @@ export default defineComponent({
   },
   mounted: async function () {
     NativeStorage.getItem("idioma").then((x) => (this.idioma = x));
-    NativeStorage.getItem("currency").then((x) => (this.currency = x));
+    NativeStorage.getItem("currency").then((x) => {
+      if (x == 0) {
+        this.currency = "eur";
+        NativeStorage.setItem("currency", this.currency);
+      } else {
+        this.currency = x;
+      }
+    });
     this.updateDetails();
     EventBus.on("updateDetails", this.updateDetails);
     EventBus.on("startLogin", this.startInfoLogin);

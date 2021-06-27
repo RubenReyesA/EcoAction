@@ -391,7 +391,7 @@ export default defineComponent({
           loading.present();
 
           axios({
-            url: "http://192.168.1.41:3013/getStats?mail=" + this.mail,
+            url: "http://10.144.3.190:3013/getStats?mail=" + this.mail,
             method: "get",
           }).then((response) => {
             this.achievementsStatus = response.data[0];
@@ -422,7 +422,7 @@ export default defineComponent({
 
             axios({
               url:
-                "http://192.168.1.41:3013/exchangeAchievement?mail=" +
+                "http://10.144.3.190:3013/exchangeAchievement?mail=" +
                 this.mail +
                 "&id=" +
                 id +
@@ -522,10 +522,10 @@ export default defineComponent({
             break;
 
           case "ach8":
-            if (this.stats.faq >= this.achievements[index].Total) {
+            if (this.stats.reward >= this.achievements[index].Total) {
               this.achievementsProcess["ach8"] = this.achievements[index].Total;
             } else {
-              this.achievementsProcess["ach8"] = this.stats.faq;
+              this.achievementsProcess["ach8"] = this.stats.reward;
             }
             break;
 

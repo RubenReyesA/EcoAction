@@ -327,7 +327,7 @@ export default defineComponent({
                 if (this.code != "") {
                   axios({
                     url:
-                      "http://192.168.1.41:3013/searchBarcode?code=" +
+                      "http://10.144.3.190:3013/searchBarcode?code=" +
                       this.code +
                       "&mail=" +
                       this.mail,
@@ -339,7 +339,7 @@ export default defineComponent({
 
                       for (let i = 0; i < response["pathIMG"].length; i++) {
                         this.sourcesIMG.push(
-                          "http://192.168.1.41:3013" + response["pathIMG"][i]
+                          "http://10.144.3.190:3013" + response["pathIMG"][i]
                         );
                       }
 

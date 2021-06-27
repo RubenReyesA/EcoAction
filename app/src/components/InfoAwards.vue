@@ -255,7 +255,7 @@ export default defineComponent({
           loading.present();
           axios({
             url:
-              "http://192.168.1.41:3013/getBalance?tokenAddress=" +
+              "http://10.144.3.190:3013/getBalance?tokenAddress=" +
               this.tokenAddress +
               "&currency=" +
               this.currency,

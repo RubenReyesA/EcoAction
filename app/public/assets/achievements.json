@@ -1,5 +1,4 @@
-[
-  {
+[{
     "id": "ach1",
     "TitleES": "Realiza la primera búsqueda",
     "TitleCA": "Realitza la primera cerca",
@@ -64,12 +63,12 @@
   },
   {
     "id": "ach8",
-    "TitleES": "Envia una propuesta de FAQ",
-    "TitleCA": "Envia una proposta de FAQ",
-    "TitleEN": "Send a FAQ proposal",
-    "Logo": "faq",
-    "Total": "1",
-    "Price": "1"
+    "TitleES": "Canjea EAs por una recompensa por segunda vez",
+    "TitleCA": "Canvia EAs per una recompensa per segona vegada",
+    "TitleEN": "Redeem EAs for a reward for the second time ",
+    "Logo": "reward",
+    "Total": "2",
+    "Price": "2"
   },
   {
     "id": "ach9",
